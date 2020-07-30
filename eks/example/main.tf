@@ -1,0 +1,29 @@
+provider "aws" {
+    region = "us-east-1"
+}
+
+module "eks" {
+  source             = "../terraform"
+  cluster_name       = "my-eks-001"
+  kubernetes_version = "1.17"
+
+  # Workers
+  desired_number_workers = 2
+  min_number_workers     = 2
+  max_number_workers     = 2
+  instance_types         = "m5.2xlarge"
+  availability_zones     = ["us-east-1a", "us-east-1b", "us-east-1c"]
+
+  providers = {
+    aws = aws
+  }
+}
+
+output "config_map_aws_auth" {
+    value = module.eks.config_map_aws_auth
+}
+
+output "kubeconfig" {
+    value = module.eks.kubeconfig
+} 
+
