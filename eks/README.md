@@ -1,11 +1,11 @@
 # EKS
 Running an EKS with Terraform >= .12
 
-Please refer official [EKS documentatio]()n for more information about EKS.
+Please refer official [EKS documentation](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) for more information about EKS.
 
 NOTE: For a small cluster it will take anywhere from 10-15 minutes to complete initial creation.
 
-Please refer to official [Terrform EKS]() docs for more information about the Terraform code.
+Please refer to official [Terrform EKS](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_cluster) docs for more information about the Terraform code.
 
 Example:
 ```
