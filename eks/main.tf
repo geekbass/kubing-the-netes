@@ -12,6 +12,7 @@ module "eks" {
   source             = "./terraform"
   cluster_name       = var.cluster_name
   kubernetes_version = var.kubernetes_version
+  aws_profile        = var.aws_profile
 
   # Workers
   node_group_name        = var.node_group_name
