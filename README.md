@@ -7,5 +7,21 @@ A collection of code to simplify and create many different types of Kuberentes c
 
 ### Konvoy
 
+### Contributing
+1) Please ensure to test changes. Ensure to include if breaking etc in PR.
+
+2) Ensure to `fmt` your files.
+```
+terraform fmt
+```
+
+3) When adding new variables, outputs, etc... ensure to include them in the README using [`terraform-docs`](https://github.com/terraform-docs/terraform-docs).
+
+```
+terraform-docs markdown ./ > README.md
+```
+
+See the [User Guide](https://github.com/terraform-docs/terraform-docs/blob/master/docs/USER_GUIDE.md) on formatting etc...
+
 ### To Do
-- Add more docs on TF best practices
+- Syncing to Registry?

@@ -13,5 +13,6 @@ output "config_map_aws_auth" {
 }
 
 output "kubeconfig" {
+  description = "Kubeconfig for Kuberenetes API"
   value = module.eks.kubeconfig
 }
