@@ -63,3 +63,8 @@ variable "cluster_name_random_string" {
   description = "Add a random string to the cluster name"
   default     = false
 }
+
+variable "aws_profile" {
+  description = "Current AWS profile to use in Kubeconfig"
+  default     = ""
+}

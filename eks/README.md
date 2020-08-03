@@ -26,7 +26,6 @@ Please see the `./example` directory for a working `main.tf` example that you ca
 
 ### To Do List
  - Add TF variables to README
- - output the kubconfig to local file
  - Add Ability to define multiple Node Groups
  - Custom IAM Roles
  - Custom CIDR Blocks for API

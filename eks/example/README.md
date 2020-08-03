@@ -12,6 +12,16 @@
 terraform plan -out plan.out
 terraform apply plan.out
 ```
+
+### Using with Kubectl
+An `admin.conf` will be created locally that be used to authenticate against the cluster. This uses the Role and/or `AWS_PROFILE` associated with what you define in you credentials.
+
+```
+export KUBECONFIG=admin.conf
+
+k get cluster-info
+
+```
 ### EKS Destroy
 1) Run destroy.
 ```

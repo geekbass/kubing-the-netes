@@ -1,5 +1,5 @@
 provider "aws" {
-    region = "us-east-1"
+  region = "us-east-1"
 }
 
 module "eks" {
@@ -19,11 +19,17 @@ module "eks" {
   }
 }
 
+// Create admin.conf local file to be used for kubectl
+resource "local_file" "kubeconfig" {
+  content  = module.eks.kubeconfig
+  filename = "${path.module}/admin.conf"
+}
+
 output "config_map_aws_auth" {
-    value = module.eks.config_map_aws_auth
+  value = module.eks.config_map_aws_auth
 }
 
 output "kubeconfig" {
-    value = module.eks.kubeconfig
-} 
+  value = module.eks.kubeconfig
+}
 
