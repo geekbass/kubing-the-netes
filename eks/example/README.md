@@ -5,7 +5,12 @@
 
 2) Make changes to the variables as you see fit.
 
-3) Auth to AWS.
+3) Initialize Terraform.
+```
+terraform init
+```
+
+4) Auth to AWS.
 
 4) Run apply.
 ```

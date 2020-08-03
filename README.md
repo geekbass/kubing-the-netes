@@ -1,6 +1,8 @@
 # Kubing-the-Netes
 A collection of code to simplify and create many different types of Kuberentes clusters (AKS, EKS, GKE, Konvoy, etc...) as well as anything else helpful such as workload, charts, etc...
 
+Each type will contain an `example` directory that will inckude working examples that can used  and modified. 
+
 ### AKS
 
 ### EKS
