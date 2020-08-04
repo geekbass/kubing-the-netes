@@ -13,6 +13,7 @@ module "eks" {
   max_number_workers     = 2
   instance_types         = "m5.2xlarge"
   availability_zones     = ["us-east-1a", "us-east-1b", "us-east-1c"]
+  aws_profile            = ""
 
   providers = {
     aws = aws
@@ -22,7 +23,7 @@ module "eks" {
 // Create admin.conf local file to be used for kubectl
 resource "local_file" "kubeconfig" {
   content  = module.eks.kubeconfig
-  filename = "${path.module}/admin.conf"
+  filename = "${path.module}/kubeconfig.conf"
 }
 
 output "config_map_aws_auth" {
