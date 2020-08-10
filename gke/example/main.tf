@@ -11,9 +11,9 @@ provider "template" {
 }
 
 module "gke" {
-  source       = "./terraform"
-  cluster_name = "gke-cluster"
-  region       = "us-west2"
+  source       = "../terraform"
+  cluster_name = "gke-cluster-001"
+  region       = "us-west1"
   labels = {
     owner      = "weston"
     expiration = "24h"

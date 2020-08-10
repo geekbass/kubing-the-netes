@@ -12,7 +12,7 @@ terraform init
 
 4) Auth to AWS.
 
-4) Run apply.
+5) Run apply.
 ```
 terraform plan -out plan.out
 terraform apply plan.out
@@ -24,7 +24,7 @@ An `admin.conf` will be created locally that be used to authenticate against the
 ```
 export KUBECONFIG=admin.conf
 
-k get cluster-info
+kubectl get cluster-info
 
 ```
 ### EKS Destroy

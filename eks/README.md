@@ -20,6 +20,9 @@ module "eks" {
     instance_types         = "m5.2xlarge"
     }
 ```
+### Prerequisites
+- [Terraform](https://www.terraform.io/downloads.html) 12 or later
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
 
 ## Requirements
 

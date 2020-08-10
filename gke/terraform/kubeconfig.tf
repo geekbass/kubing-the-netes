@@ -36,6 +36,6 @@ resource "null_resource" "local_file_write_kubeconfig" {
   }
 
   provisioner "local-exec" {
-    command = "echo \"${chomp(data.template_file.kubeconfig.rendered)}\" > ./kubeconfig"
+    command = "echo \"${chomp(data.template_file.kubeconfig.rendered)}\" > ./kubeconfig.conf"
   }
 }
