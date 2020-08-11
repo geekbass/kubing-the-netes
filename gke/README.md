@@ -35,8 +35,7 @@ module "gke" {
 | Name | Version |
 |------|---------|
 | google | ~> 3.0 |
-| null | ~> 2.1 |
-| template | ~> 2.1 |
+| random | >= 2.0 |
 
 ## Providers
 
@@ -59,5 +58,7 @@ No provider.
 
 ## Outputs
 
-No output.
+| Name | Description |
+|------|-------------|
+| kubeconfig | Kubeconfig for Kuberenetes API |
 

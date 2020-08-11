@@ -2,14 +2,6 @@ provider "google" {
   version = "~> 3.0"
 }
 
-provider "null" {
-  version = "~> 2.1"
-}
-
-provider "template" {
-  version = "~> 2.1"
-}
-
 module "gke" {
   source       = "../terraform"
   cluster_name = "gke-cluster-001"
@@ -26,4 +18,14 @@ module "gke" {
   providers = {
     google = google
   }
+}
+
+// Create admin.conf local file to be used for kubectl
+resource "local_file" "kubeconfig" {
+  content  = module.gke.kubeconfig
+  filename = "${path.module}/kubeconfig.conf"
+}
+
+output "kubeconfig" {
+  value = module.gke.kubeconfig
 }
