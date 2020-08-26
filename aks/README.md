@@ -13,13 +13,14 @@ module "aks" {
 
    cluster_name       = "my-aks-001"
    kubernetes_version = "1.17.9"
-   location           = var.location
-   tags               = var.tags
+   location           = "uswest"
+   tags      {
+      name = "my-aks-001"
+      env  = "prod"
+      }
 
    # Worker Nodes
-   vm_size                   = var.vm_size
-   availability_zones        = var.availability_zones
-   node_count                = var.node_count
+   node_count = 5
  }
 ```
 ### Prerequisites
