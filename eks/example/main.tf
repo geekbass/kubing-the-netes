@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "eks" {
-  source             = "../terraform"
+  source             = "../"
   cluster_name       = "my-eks-001"
   kubernetes_version = "1.17"
 

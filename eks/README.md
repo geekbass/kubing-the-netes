@@ -9,7 +9,8 @@ Example:
 
 ```hcl
 module "eks" {
-    source = "./terraform"
+    source = "geekbass/terraform-aws-eks"
+    version = "~> 0.0.1"
     cluster_name   = "my-eks-001
     kubernetes_version = "1.17"
 
@@ -36,6 +37,7 @@ module "eks" {
 | Name | Version |
 |------|---------|
 | aws | >= 2.58 |
+| random | >= 2.0 |
 
 ## Inputs
 
@@ -43,7 +45,7 @@ module "eks" {
 |------|-------------|------|---------|:--------:|
 | ami\_type | Desired AMI Type to Use. | `string` | `"AL2_x86_64"` | no |
 | availability\_zones | List of AZs. | `list(string)` | `[]` | no |
-| aws\_profile | AWS profile to use in Kubeconfig | `string` | `""` | no |
+| aws\_profile | Current AWS profile to use in Kubeconfig | `string` | `""` | no |
 | cluster\_name | The name of your EKS Cluster. | `string` | `"my-eks"` | no |
 | cluster\_name\_random\_string | Add a random string to the cluster name | `bool` | `false` | no |
 | desired\_number\_workers | Desired Number of Worker Nodes. | `number` | `1` | no |
@@ -62,5 +64,5 @@ module "eks" {
 | config\_map\_aws\_auth | n/a |
 | eks\_cluster\_arn | The Amazon Resource Name (ARN) of the cluster |
 | eks\_cluster\_id | The name of the cluster |
-| kubeconfig | Kubeconfig for Kuberenetes API |
+| kubeconfig | n/a |
 
