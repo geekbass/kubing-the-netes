@@ -35,7 +35,7 @@ variable "role_based_access_control" {
 
 variable "kube_dashboard" {
   description = "Enable Kubernetes Dashboard."
-  default     = true
+  default     = false
 }
 
 variable "tags" {
