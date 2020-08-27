@@ -9,7 +9,8 @@ Example:
 
 ```hcl
 module "aks" {
-   source = "./terraform"
+   source = "geekbass/terraform-azurerm-aks"
+   version = "~> 0.0.1"
 
    cluster_name       = "my-aks-001"
    kubernetes_version = "1.17.9"
@@ -36,14 +37,18 @@ module "aks" {
 
 ## Providers
 
-No provider.
+| Name | Version |
+|------|---------|
+| azurerm | >= 2.20 |
+| random | >= 2.0 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | cluster\_name | The name of your AKS Cluster. | `string` | `"my-aks"` | no |
-| kube\_dashboard | Enable Kubernetes Dashboard. | `bool` | `true` | no |
+| cluster\_name\_random\_string | Add a random string to the cluster name | `bool` | `false` | no |
+| kube\_dashboard | Enable Kubernetes Dashboard. | `bool` | `false` | no |
 | kubernetes\_version | Desired Kubernetes Version for the Cluster. This is used for Both Control Plane and Workers. | `string` | `"1.17.9"` | no |
 | location | Desired Azure Location. | `string` | `"westus"` | no |
 | node\_count | Number of Nodes in the Default Node Pool. | `string` | `"4"` | no |
@@ -55,5 +60,5 @@ No provider.
 
 | Name | Description |
 |------|-------------|
-| kubeconfig | n/a |
+| kubeconfig | kubeconfig for kubectl |
 

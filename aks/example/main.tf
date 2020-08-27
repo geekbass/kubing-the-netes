@@ -8,7 +8,7 @@ provider "random" {
 }
 
 module "aks" {
-  source = "../terraform"
+  source = "../"
 
   cluster_name       = "my-aks-001"
   kubernetes_version = "1.17.9"
