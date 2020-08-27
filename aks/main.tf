@@ -10,7 +10,8 @@
 *
 * ```hcl
 * module "aks" {
-*    source = "./terraform"
+*    source = "geekbass/terraform-azurerm-aks"
+*    version = "~> 0.0.1"
 *  
 *    cluster_name       = "my-aks-001"
 *    kubernetes_version = "1.17.9"
@@ -38,23 +39,70 @@ provider "random" {
   version = ">= 2.0"
 }
 
-module "aks" {
-  source = "./terraform"
-
-  cluster_name       = var.cluster_name
-  kubernetes_version = var.kubernetes_version
-  location           = var.location
-  tags               = var.tags
-
-  # Worker Nodes
-  vm_size = var.vm_size
-  //availability_zones        = var.availability_zones
-  node_count                = var.node_count
-  role_based_access_control = var.role_based_access_control
-  kube_dashboard            = var.kube_dashboard
-
-  providers = {
-    azurerm = azurerm
-  }
+resource "random_id" "id" {
+  byte_length = 4
+  prefix      = var.cluster_name
 }
 
+locals {
+  cluster_name = var.cluster_name_random_string ? random_id.id.hex : var.cluster_name
+}
+
+resource "azurerm_resource_group" "aks" {
+  name     = "${local.cluster_name}-rg"
+  location = var.location
+}
+
+resource "azurerm_kubernetes_cluster" "aks" {
+
+  depends_on = [
+    azurerm_resource_group.aks
+  ]
+
+  name                = local.cluster_name
+  resource_group_name = azurerm_resource_group.aks.name
+  location            = azurerm_resource_group.aks.location
+  dns_prefix          = "${local.cluster_name}-dns"
+  kubernetes_version  = var.kubernetes_version #coalesece 
+
+  //api_server_authorized_ip_ranges = [var.api_server_authorized_ip_ranges]
+
+  default_node_pool {
+    name    = "main"
+    vm_size = var.vm_size
+    //availability_zones   = var.availability_zones
+    //vnet_subnet_id       = local.subnet_id
+    enable_auto_scaling  = false
+    node_count           = var.node_count
+    orchestrator_version = var.kubernetes_version
+  }
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  //service_principal {
+  //  client_id     = var.service_principal_id     # If exist
+  //  client_secret = var.service_principal_secret # if exist 
+  //}
+
+  role_based_access_control {
+    enabled = var.role_based_access_control
+  }
+
+  network_profile {
+    network_plugin = "kubenet"
+    // Accept the defaults for now
+    //service_cidr       = var.service_cidr
+    //dns_service_ip     = var.dns_service_ip
+    //pod_cidr           = var.pod_cidr
+    //docker_bridge_cidr = var.docker_bridge_cidr
+  }
+  addon_profile {
+    kube_dashboard {
+      enabled = var.kube_dashboard
+    }
+  }
+
+  tags = var.tags
+}
