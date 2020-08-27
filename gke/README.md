@@ -9,7 +9,8 @@ Example:
 
 ```hcl
 module "gke" {
- source                 = "./terraform"
+ source                 = "geekbass/terraform-google-gke"
+ version                = "~> 0.0.1"
  cluster_name           = "gke-cluster"
  region                 = "us-west-1"
  labels = {
@@ -35,11 +36,16 @@ module "gke" {
 | Name | Version |
 |------|---------|
 | google | ~> 3.0 |
+| kubernetes | ~> 1.11 |
 | random | >= 2.0 |
 
 ## Providers
 
-No provider.
+| Name | Version |
+|------|---------|
+| google | ~> 3.0 |
+| kubernetes | ~> 1.11 |
+| random | >= 2.0 |
 
 ## Inputs
 
@@ -60,5 +66,5 @@ No provider.
 
 | Name | Description |
 |------|-------------|
-| kubeconfig | Kubeconfig for Kuberenetes API |
+| kubeconfig | n/a |
 

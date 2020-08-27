@@ -3,7 +3,7 @@ provider "google" {
 }
 
 module "gke" {
-  source       = "../terraform"
+  source       = "../"
   cluster_name = "gke-cluster-001"
   region       = "us-west1"
   labels = {
