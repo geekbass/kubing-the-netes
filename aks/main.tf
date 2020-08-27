@@ -1,16 +1,16 @@
 /**
 * # Running an AKS with Terraform >= .12
-* Please refer official [AKS documentation]() for more information about EKS.
+* Please refer official [AKS documentation](https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes) for more information about EKS.
 * 
 * NOTE: For a small cluster it will take anywhere from 10-15 minutes to complete initial creation.
 * 
-* Please refer to official [Terrform AKS]() docs for more information about the Terraform code.
+* Please refer to official [Terrform AKS](https://www.terraform.io/docs/providers/azurerm/r/kubernetes_cluster.html) docs for more information about the Terraform code.
 * 
 * Example:
 *
 * ```hcl
 * module "aks" {
-*    source = "geekbass/terraform-azurerm-aks"
+*    source = "geekbass/aks/azurerm"
 *    version = "~> 0.0.1"
 *  
 *    cluster_name       = "my-aks-001"
@@ -27,7 +27,7 @@
 * ```
 * ### Prerequisites
 * - [Terraform](https://www.terraform.io/downloads.html) 12 or later
-* - [Azure CLI]()
+* - [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest)
 */
 
 provider "azurerm" {

@@ -8,7 +8,8 @@ provider "random" {
 }
 
 module "aks" {
-  source = "../"
+  source = "geekbass/aks/azurerm"
+  version = "~> 0.0.1"
 
   cluster_name       = "my-aks-001"
   kubernetes_version = "1.17.9"
