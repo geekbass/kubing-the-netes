@@ -31,24 +31,14 @@ terraform-docs markdown ./ > README.md
 See the [User Guide](https://github.com/terraform-docs/terraform-docs/blob/master/docs/USER_GUIDE.md) on formatting etc...
 
 ### New Version for Terraform Registry
-***NOTE: To be automated.***
 1) Go to according repo that is synced to the Registry.
 
-2) Pull in the latest changes from the gitsubmodule.
+2) Run the Makefile specifying the branch.
 ```
-git submodule init
-git submodule update
-
-cd stage/
-git pull origin master
+make update BRANCH=master
 ```
-
 3) Commit and merge the changes.
-```
-cd ../
-git commit -m 'updating submodule'
-git push origin master
-```
+
 4) Cut the new Release. Specify in version format 0.0.X with version in title and meaningful description.
 
 5) Go to the Registry and sync the changes.
