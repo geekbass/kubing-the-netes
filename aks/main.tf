@@ -51,6 +51,7 @@ locals {
 resource "azurerm_resource_group" "aks" {
   name     = "${local.cluster_name}-rg"
   location = var.location
+  tags     = var.tags
 }
 
 resource "azurerm_kubernetes_cluster" "aks" {
