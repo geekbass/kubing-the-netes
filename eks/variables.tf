@@ -53,6 +53,11 @@ variable "instance_types" {
   default     = "t3.medium"
 }
 
+variable "region" {
+  description = "AWS Region."
+  default     = "us-east-1"
+}
+
 variable "availability_zones" {
   description = "List of AZs."
   type        = list(string)
