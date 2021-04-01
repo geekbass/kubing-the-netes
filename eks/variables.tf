@@ -53,11 +53,6 @@ variable "instance_types" {
   default     = "t3.medium"
 }
 
-variable "region" {
-  description = "AWS Region."
-  default     = "us-east-1"
-}
-
 variable "availability_zones" {
   description = "List of AZs."
   type        = list(string)
@@ -78,4 +73,32 @@ variable "tags" {
   description = "A map of tags to add to all resources."
   type        = map(string)
   default     = {}
+}
+
+variable "admin_ips" {
+  description = "List of IPs that can access API."
+  type        = list(any)
+  default     = ["0.0.0.0/32"]
+}
+
+variable "node_groups" {
+  description = "Map of maps of eks node groups to create."
+  type        = any
+  default = {
+    example = {
+      name                   = "example"
+      desired_number_workers = 2
+      max_number_workers     = 2
+      min_number_workers     = 2
+
+      instance_types = ["t2.medium"]
+      ami_type       = "AL2_x86_64"
+      disk_size      = 50
+
+      k8s_labels = {
+        name        = "example"
+        environment = "example"
+      }
+    }
+  }
 }

@@ -12,13 +12,43 @@ module "eks" {
     source = "geekbass/eks/aws"
     version = "~> 0.0.1"
     cluster_name   = "my-eks-001
-    kubernetes_version = "1.17"
+    kubernetes_version = "1.19"
 
     # Workers
-    desired_number_workers = 2
-    min_number_workers     = 2
-    max_number_workers     = 2
-    instance_types         = "m5.2xlarge"
+    node_groups = {
+      label-studio = {
+          name = "label-studio"
+          desired_number_workers = 2
+           max_number_workers     = 2
+           min_number_workers     = 2
+
+           instance_types = ["t2.medium"]
+           ami_type  = "AL2_x86_64"
+           disk_size = 50
+
+           k8s_labels = {
+               environment = "test"
+               app  = "label-studio"
+               owner   = "datascience"
+           }
+       },
+       ops = {
+           name = "ops"
+           desired_number_workers = 2
+           max_number_workers     = 2
+           min_number_workers     = 2
+
+           instance_types = ["t2.medium"]
+           ami_type  = "AL2_x86_64"
+           disk_size = 50
+
+           k8s_labels = {
+               environment = "test"
+               app  = "ops"
+               owner   = "datascience"
+           }
+       }
+   }
     }
 ```
 ### Prerequisites
@@ -50,13 +80,12 @@ No modules.
 | [aws_iam_role.eks-node](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.eks-cluster-AmazonEKSClusterPolicy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.eks-cluster-AmazonEKSServicePolicy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role_policy_attachment.eks-cluster-AmazonEKSVPCResourceController](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.eks-node-AmazonEC2ContainerRegistryReadOnly](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.eks-node-AmazonEKSWorkerNodePolicy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_iam_role_policy_attachment.eks-node-AmazonEKS_CNI_Policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_internet_gateway.eks](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway) | resource |
 | [aws_route.internet_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route) | resource |
-| [aws_security_group.eks-cluster](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
-| [aws_security_group_rule.eks-cluster-api](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
 | [aws_subnet.eks](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet) | resource |
 | [aws_vpc.eks](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc) | resource |
 | [random_id.id](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/id) | resource |
@@ -69,6 +98,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_admin_ips"></a> [admin\_ips](#input\_admin\_ips) | List of IPs that can access API. | `list(any)` | <pre>[<br>  "0.0.0.0/32"<br>]</pre> | no |
 | <a name="input_ami_type"></a> [ami\_type](#input\_ami\_type) | Desired AMI Type to Use. | `string` | `"AL2_x86_64"` | no |
 | <a name="input_availability_zones"></a> [availability\_zones](#input\_availability\_zones) | List of AZs. | `list(string)` | `[]` | no |
 | <a name="input_aws_profile"></a> [aws\_profile](#input\_aws\_profile) | Current AWS profile to use in Kubeconfig | `string` | `""` | no |
@@ -82,7 +112,7 @@ No modules.
 | <a name="input_max_number_workers"></a> [max\_number\_workers](#input\_max\_number\_workers) | Maximum Number of Worker Nodes. | `number` | `1` | no |
 | <a name="input_min_number_workers"></a> [min\_number\_workers](#input\_min\_number\_workers) | Minimum Number of Worker Nodes. | `number` | `1` | no |
 | <a name="input_node_group_name"></a> [node\_group\_name](#input\_node\_group\_name) | Node Group Name | `string` | `"eks"` | no |
-| <a name="input_region"></a> [region](#input\_region) | AWS Region. | `string` | `"us-east-1"` | no |
+| <a name="input_node_groups"></a> [node\_groups](#input\_node\_groups) | Map of maps of eks node groups to create. | `any` | <pre>{<br>  "example": {<br>    "ami_type": "AL2_x86_64",<br>    "desired_number_workers": 2,<br>    "disk_size": 50,<br>    "instance_types": [<br>      "t2.medium"<br>    ],<br>    "k8s_labels": {<br>      "environment": "example",<br>      "name": "example"<br>    },<br>    "max_number_workers": 2,<br>    "min_number_workers": 2,<br>    "name": "example"<br>  }<br>}</pre> | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources. | `map(string)` | `{}` | no |
 
 ## Outputs
